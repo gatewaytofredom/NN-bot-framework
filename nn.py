@@ -70,7 +70,7 @@ class neural_network:
         model = Sequential()
         model.add(
             Conv2D(
-                32,
+                64,
                 (3, 3),
                 data_format="channels_last",
                 padding="valid",
@@ -80,20 +80,31 @@ class neural_network:
         )
         model.add(
             Conv2D(
-                32,
-                (2, 2),
+                64,
+                (3, 3),
+                data_format="channels_last",
+                padding="valid",
+                activation="relu",
+            )
+        )
+        model.add(
+            Conv2D(
+                128,
+                (3, 3),
                 data_format="channels_last",
                 padding="valid",
                 activation="relu",
             )
         )
         model.add(MaxPooling2D(pool_size=(2, 2)))
+        model.add(MaxPooling2D(pool_size=(2, 2)))
         model.add((Flatten()))
         model.add(Dropout(0.25))
         model.add(Dense(256, activation="relu", use_bias=True))
-        model.add(Dense(256, activation="relu", use_bias=True))
-        model.add(Dense(128, activation="relu", use_bias=True))
-        model.add(Dense(8, activation="sigmoid"))
+        model.add(Dense(512, activation="relu", use_bias=True))
+        model.add(Dropout(0.25))
+        model.add(Dense(18, activation="relu", use_bias=True))
+        model.add(Dense(9, activation="sigmoid"))
 
         model.compile(
             loss="mean_squared_error",
@@ -128,9 +139,7 @@ class neural_network:
 
         model.summary()
 
-        model.fit(numpy_reshaped_frames, inputs, epochs=150, batch_size=16)
-
-        print("PREDICTION")
+        model.fit(numpy_reshaped_frames, inputs, epochs=50, batch_size=32)
 
         for frame in reshaped_frames[:25]:
             test_ar = [frame]
@@ -167,7 +176,9 @@ class neural_network:
                 normalized_frames = []
 
                 for index, frame in enumerate(frames):
-                    for index, pixel in enumerate(frame):
+                    for index, pixel in enumerate(
+                        cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+                    ):
                         normalized_frame.append(pixel / 255)
                     normalized_frames.append(normalized_frame)
                     normalized_frame = []

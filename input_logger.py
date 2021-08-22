@@ -14,12 +14,12 @@ class input_logger:
 
         key_down = []
 
-        # for key in ["w", "a", "s", "d", "f"]: NOITA
-        # if ky.is_pressed(key):
-        #     print(f"{key} pressed!")
-        #     key_down.append(1)
-        # else:
-        #     key_down.append(0)
+        for key in ["w", "a", "s", "d", "e", "f"]:
+            if ky.is_pressed(key):
+                print(f"{key} pressed!")
+                key_down.append(1)
+            else:
+                key_down.append(0)
 
         return key_down
 

@@ -15,7 +15,7 @@ filename = "output.mp4"
 
 mp4 = f"generate_mp4.py -e jpg -fps 30 -d images"
 
-application_name = "Galcon 2"
+application_name = "noita"
 
 
 def main():
@@ -53,12 +53,7 @@ def main():
                     [cv2.IMWRITE_JPEG_QUALITY, 40],
                 )
                 gameplay_writer.writerow(
-                    [
-                        mouse_state[0],
-                        mouse_state[1],
-                        mouse_state[2]
-                        # *keyboard_state,
-                    ]
+                    [mouse_state[0], mouse_state[1], mouse_state[2], *keyboard_state]
                 )
                 i += 1
 

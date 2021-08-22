@@ -54,7 +54,6 @@ def capture(game_name):
         ),
         interpolation=cv2.INTER_AREA,
     )
-    image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 
     height = img.shape[0]
     width = img.shape[1]

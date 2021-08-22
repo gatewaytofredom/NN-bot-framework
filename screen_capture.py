@@ -30,7 +30,6 @@ def capture(window_name):
 
         # Grab the data
         img = np.array(sct.grab(monitor))
-
     return cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 
 
